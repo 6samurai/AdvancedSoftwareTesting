@@ -6,7 +6,7 @@ public class Pixel {
     private  int b = 0;
     private  int x = 0;
     private  int y = 0;
-
+    private  int fitness =0;
     public Pixel(){
 
     }
@@ -39,6 +39,10 @@ public class Pixel {
         return y;
     }
 
+    public int getFitness() {
+        return fitness;
+    }
+
     public void setB(int b) {
         this.b = b;
     }
@@ -57,5 +61,34 @@ public class Pixel {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setFitness(int fitness) {
+        this.fitness = fitness;
+    }
+
+    public Pixel defaultPixel(){
+        Pixel newPixel = new Pixel();
+        newPixel.setB(-2);
+        newPixel.setY(-2);
+        newPixel.setX(-2);
+        newPixel.setG(-2);
+        newPixel.setR(-2);
+        newPixel.setFitness(-2);
+
+        return newPixel;
+
+    }
+
+    public Pixel setPixel(Pixel inputPixel, Pixel newPixel){
+        newPixel.setB(inputPixel.getB());
+        newPixel.setY(inputPixel.getY());
+        newPixel.setX(inputPixel.getX());
+        newPixel.setG(inputPixel.getG());
+        newPixel.setR(inputPixel.getR());
+        newPixel.setFitness(inputPixel.getFitness());
+
+        return  newPixel;
+
     }
 }

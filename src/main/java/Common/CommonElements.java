@@ -13,8 +13,8 @@ public class CommonElements {
 
     private String url = "https://virtualscreen.azurewebsites.net/api/pixels" ;
     private String sessionID = "74993M";
-    private int length = 1600;
-    private int width = 1200;
+    private int y_axis = 1200;
+    private int x_axis = 1600;
     private int maxRGB = 256;
 
     public String getUrl() {
@@ -25,11 +25,11 @@ public class CommonElements {
     }
 
     public int getLength(){
-        return  length;
+        return  y_axis;
     }
 
     public int getWidth(){
-        return  width;
+        return  x_axis;
     }
 
 
@@ -42,31 +42,31 @@ public class CommonElements {
 
     public int randomLengthPoint(){
         Random rand = new Random();
-        int n = rand.nextInt(this.length);
+        int n = rand.nextInt(this.y_axis);
         return n;
     }
 
-    public int randomWidthhPoint(){
+    public int randomWidthPoint(){
         Random rand = new Random();
-        int n = rand.nextInt(this.width);
+        int n = rand.nextInt(this.x_axis);
         return n;
     }
 
-    public List<Pixel> controlBugs(int length, int width){
+    public List<Pixel> controlBugs(int y_axis, int x_axis){
         List<Pixel> display = new ArrayList<Pixel>();
         HttpResponse<JsonNode> response = null;
         Pixel currentPixel = new Pixel();
 
         outerLoop:
-        for(int i= 0; i <length;i++){
-            for(int j = 0; j<width; j++){
+        for(int i= 0; i <y_axis;i++){
+            for(int j = 0; j<x_axis; j++){
 
                 currentPixel.setX(j);
                 currentPixel.setY(i);
                 currentPixel = setRandomRGB(currentPixel);
 
-                if(putPixel(i,j,currentPixel)){
-                    response = getPixel(i,j,currentPixel);
+                if(putPixel(currentPixel)){
+                    response = getPixel(currentPixel);
                     if(!comparePixel(response,currentPixel))
                         display.add(currentPixel);
 
@@ -88,11 +88,11 @@ public class CommonElements {
         return  currentPixel;
     }
 
-    public boolean putPixel(int i, int j, Pixel currentPixel ){
+    public boolean putPixel(Pixel currentPixel ){
         APIRequestCommands apiRequestCommands = new APIRequestCommands();
         HttpResponse<JsonNode> response = null;
 
-        response = apiRequestCommands.PUT(j,i,currentPixel.getR(),currentPixel.getG(),currentPixel.getB());
+        response = apiRequestCommands.PUT(currentPixel.getX(),currentPixel.getY(),currentPixel.getR(),currentPixel.getG(),currentPixel.getB());
 
         if(response.getStatus() ==201){
             return  true;
@@ -100,11 +100,11 @@ public class CommonElements {
         return  false;
     }
 
-    public HttpResponse<JsonNode> getPixel (int i, int j, Pixel currentPixel){
+    public HttpResponse<JsonNode> getPixel (Pixel currentPixel){
         APIRequestCommands apiRequestCommands = new APIRequestCommands();
         HttpResponse<JsonNode> response = null;
 
-        response = apiRequestCommands.GET(j,i);
+        response = apiRequestCommands.GET(currentPixel.getX(),currentPixel.getY());
         if(response.getStatus() ==200) {
                 return response;
         }
@@ -122,8 +122,8 @@ public class CommonElements {
     public void printFitness(){
         APIRequestCommands apiRequestCommands = new APIRequestCommands();
         HttpResponse<JsonNode> response = null;
-        for(int i =0; i <length; i ++){
-            for(int j=0; j<width;j++){
+        for(int i =0; i <y_axis; i ++){
+            for(int j=0; j<x_axis;j++){
                 response = apiRequestCommands.GET(j,i);
                 System.out.print(response.getBody().getObject().get("fitness") + " ");
             }

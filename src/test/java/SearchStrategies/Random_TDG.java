@@ -10,6 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Random_TDG {
+
+
+    public Pixel Random_TDG_Method (Pixel currentPixel ){
+        CommonElements common = new CommonElements();
+        int x = common.randomWidthPoint();
+        int y = common.randomLengthPoint();
+        currentPixel.setX(x);
+        currentPixel.setY(y);
+
+
+        return  currentPixel;
+
+    }
+
+
+    /*
     public List<Pixel> Random_TDG_Method (int maxIteration ){
         try{
             CommonElements common = new CommonElements();
@@ -22,7 +38,7 @@ public class Random_TDG {
 
             for(int i =0; i <maxIteration;i++){
 
-                int x = common.randomWidthhPoint();
+                int x = common.randomWidthPoint();
                 int y = common.randomLengthPoint();
                 currentPixel.setX(x);
                 currentPixel.setY(y);
@@ -43,7 +59,7 @@ public class Random_TDG {
             System.out.println("An error has occurred during execution" );
             return  null;
         }
-    }
+    }*/
 }
 
 //for an evaluation of 160*120 - 8281 bugs were detected - this was a brute force method

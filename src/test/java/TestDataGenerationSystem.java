@@ -1,6 +1,7 @@
 import APIRequest.APIRequestCommands;
 import Common.CommonElements;
 import Pixel.Pixel;
+import SearchStrategies.HillClimbing_TDG;
 import SearchStrategies.Random_TDG;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataGenerationSystem {
-    public static void  main (String [] args){
-        try{
+    public static void main(String[] args) {
+        try {
             CommonElements common = new CommonElements();
             APIRequestCommands api_Request = new APIRequestCommands();
             String url = common.getUrl();
@@ -25,51 +26,77 @@ public class TestDataGenerationSystem {
             System.out.println(api_Request.GET(9,8).getBody());*/
 
 
-            int maxIteration = 10000;
-
+            int maxIteration = 2000;
+            Pixel currentPixel = new Pixel();
             List<Pixel> displayBugs = new ArrayList<Pixel>();
-
-            int strategySelection = 0;
-            switch (strategySelection){
-
-                //Random Strategy
-                case 0:
-                    Random_TDG random_tdg = new Random_TDG();
-                    displayBugs=  random_tdg.Random_TDG_Method(maxIteration);
-
-                    break;
-                //Hill Climbing - x axis traversal
-                case 1:
+            HttpResponse<JsonNode> response = null;
+            int strategySelection = 1;
+            boolean gridValuesValid = false;
+            List<Pixel> currentPoints = null;
+            for (int i = 0; i < maxIteration; i++) {
 
 
-                    break;
+                switch (strategySelection) {
+                    //Random Strategy
+                    case 0:
+                        Random_TDG random_tdg = new Random_TDG();
+                        currentPixel = random_tdg.Random_TDG_Method(currentPixel);
 
-                //Hill Climbing - y axis traversal
-                case 2:
+                        break;
+                    //Hill Climbing
+                    case 1:
+                        HillClimbing_TDG hillClimbing_tdg = new HillClimbing_TDG();
+                        currentPoints = hillClimbing_tdg.HillClimbing_TDG_Method(currentPoints,common.getLength(), common.getWidth());
+                        currentPixel = currentPoints.get(0);
+
+                        break;
+
+                    //Custom Strategy
+                    case 2:
+
+
+                        break;
 
 
 
-                    break;
-                //Custom Strategy
-                case 3:
+
+                }
 
 
+                currentPixel = common.setRandomRGB(currentPixel);
 
-                    break;
+                if (common.putPixel(currentPixel)) {
+                    response = common.getPixel(currentPixel);
+                    gridValuesValid = common.comparePixel(response, currentPixel);
+                    if (!gridValuesValid){
+                        displayBugs.add(currentPixel);
+                        System.out.println("x" + currentPixel.getX()+ "y " + currentPixel.getY());
+
+                    }else  if (gridValuesValid & strategySelection !=0){
 
 
+                    }
+
+                    if(strategySelection==1){
+                        int fitness = (Integer) response.getBody().getObject().get("fitness");
+                        currentPoints.get(0).setFitness(fitness);
+                    }
+
+
+                } else {
+                    throw new Exception();
+                }
             }
-            //
 
-            System.out.println("Bugs detected :" + displayBugs.size() );
-        } catch (Exception e){
-            System.out.println("An error has occurred during execution" );
+
+            System.out.println("Bugs detected :" + displayBugs.size());
+        } catch (Exception e) {
+            System.out.println("An error has occurred during execution");
         }
     }
 }
 
 //for an evaluation of 160*120 - 8281 bugs were detected - this was a brute force method
-
 
 
 // DEL  https://virtualscreen.azurewebsites.net/api/pixels?session=1234M
