@@ -1,13 +1,8 @@
 package SearchStrategies;
 
-import APIRequest.APIRequestCommands;
 import Common.CommonElements;
 import Pixel.Pixel;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Random_TDG {
 

@@ -22,7 +22,7 @@ public class HillClimbing_TDG {
 
             List<Pixel> newGrid = new ArrayList<Pixel>();
             if(currentGrid ==null){
-                currentGrid = defaultGridValues(length, width);
+                currentGrid = defaultGridValues(length, width,3,3);
                 return  currentGrid;
 
             } else {
@@ -46,7 +46,7 @@ public class HillClimbing_TDG {
                 }
 
                 if(fitnessCount==0){
-                    currentGrid = defaultGridValues(length, width);
+                    currentGrid = defaultGridValues(length, width,3,3);
                     return  currentGrid;
                 }
             }
@@ -110,7 +110,7 @@ public class HillClimbing_TDG {
 
 
             if(samePoints == currentGrid.size()){
-            currentGrid =   defaultGridValues(length, width);
+            currentGrid =   defaultGridValues(length, width,3,3);
                 return  currentGrid;
             } else{
 
@@ -128,7 +128,7 @@ public class HillClimbing_TDG {
 
 
 
-    public List<Pixel> defaultGridValues(int length, int width){
+    public List<Pixel> defaultGridValues(int length, int width, int max_i, int max_j){
 
         CommonElements commonElements = new CommonElements();
         int x =  commonElements.randomWidthPoint();
@@ -138,8 +138,8 @@ public class HillClimbing_TDG {
         int new_y=y;
         List<Pixel> newGrid = new ArrayList<Pixel>();
 
-        for(int i =0;i<3;i++){
-            for(int j =0; j<3;j++){
+        for(int i =0;i<max_i;i++){
+            for(int j =0; j<max_j;j++){
 
                 if(i !=0)
                     new_x =  x + (int) Math.pow(-1, i);
@@ -159,6 +159,7 @@ public class HillClimbing_TDG {
             }
         }
 
+        return  newGrid;
 
     /*    for(int i =0;i<3;i++){
             for(int j =0; j<3;j++){
@@ -175,6 +176,5 @@ public class HillClimbing_TDG {
         }*/
 
 
-        return  newGrid;
     }
 }

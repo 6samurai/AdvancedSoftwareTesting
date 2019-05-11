@@ -72,9 +72,6 @@ public class TestDataGenerationSystem {
                         displayBugs.add(currentPixel);
                         System.out.println("x" + currentPixel.getX()+ "y " + currentPixel.getY());
 
-                    }else  if (gridValuesValid & strategySelection !=0){
-
-
                     }
 
                     if(strategySelection==1){
@@ -95,6 +92,9 @@ public class TestDataGenerationSystem {
         }
     }
 }
+
+
+
 
 //for an evaluation of 160*120 - 8281 bugs were detected - this was a brute force method
 
