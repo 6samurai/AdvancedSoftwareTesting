@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46ad7da5-8aae-468b-97c7-4a3b8334c3f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/APIRequest/APIRequestCommands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/APIRequest/APIRequestCommands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Common/CommonElements.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Common/CommonElements.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Pixel/Pixel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Pixel/Pixel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/AdvancedSoftwareTesting.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/SearchStrategies/HillClimbing_TDG.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/SearchStrategies/Random_TDG.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/TestDataGenerationSystem.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,8 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Assignment" />
@@ -46,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Pixel/Pixel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="765">
               <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
               <folding>
                 <element signature="e#633#634#0" expanded="true" />
@@ -77,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            <state relative-caret-position="369">
+              <caret line="53" column="74" lean-forward="true" selection-start-line="53" selection-start-column="74" selection-end-line="53" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="315">
+              <caret line="89" column="10" lean-forward="true" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,13 +90,41 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="751">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="164">
+              <caret line="271" selection-start-line="271" selection-end-line="271" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#544#551#0" expanded="true" />
-                <element signature="e#1151#1158#0" expanded="true" />
-                <element signature="e#3835#3842#0" expanded="true" />
+                <element signature="e#604#611#0" expanded="true" />
+                <element signature="e#680#687#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/Comparator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="149" column="28" lean-forward="true" selection-start-line="149" selection-start-column="28" selection-end-line="149" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Common/CommonElements.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1088">
+              <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+                <element signature="e#539#540#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#606#607#0" expanded="true" />
+                <element signature="e#635#636#0" expanded="true" />
+                <element signature="e#665#666#0" expanded="true" />
+                <element signature="e#693#694#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="28" selection-start-line="28" selection-end-line="45" selection-end-column="17" />
+            <state relative-caret-position="411">
+              <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,9 +158,18 @@
       <find>width</find>
       <find>defaultGridValues</find>
       <find>swap</find>
+      <find>dete</find>
+      <find>maxFitness</find>
+      <find>sort</find>
+      <find>Collections.copy(originalPoints, currentPoints);</find>
+      <find>currentPoints</find>
+      <find>originalPoints</find>
+      <find>copy</find>
+      <find>delete</find>
     </findStrings>
     <replaceStrings>
       <replace>_axis</replace>
+      <replace>totalFitness</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -159,9 +185,9 @@
         <option value="$PROJECT_DIR$/src/main/java/Pixel/Pixel.java" />
         <option value="$PROJECT_DIR$/src/main/java/Common/CommonElements.java" />
         <option value="$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java" />
-        <option value="$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java" />
-        <option value="$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java" />
+        <option value="$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java" />
         <option value="$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java" />
       </list>
     </option>
@@ -195,8 +221,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -270,21 +294,14 @@
             <path>
               <item name="Assignment" type="b2602c69:ProjectViewProjectNode" />
               <item name="AdvancedSoftwareTesting" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="SearchStrategies" type="462c0819:PsiDirectoryNode" />
-              <item name="Custom_TDG.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="Assignment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AdvancedSoftwareTesting" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,11 +382,12 @@
       <workItem from="1557474932121" duration="23766000" />
       <workItem from="1557560318919" duration="3027000" />
       <workItem from="1557563434751" duration="11260000" />
+      <workItem from="1557655560198" duration="23365000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80247000" />
+    <option name="totallyTimeSpent" value="103612000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -383,7 +401,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.26599148" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.20842217" />
       <window_info id="Structure" order="1" sideWeight="0.50080776" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -392,17 +410,17 @@
       <window_info id="Favorites" order="6" sideWeight="0.50080776" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.20043337" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.32569295" weight="0.37053087" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49573562" weight="0.37703142" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.42110875" weight="0.3564464" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49840087" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50586355" side_tool="true" visible="true" weight="0.32827735" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49413645" weight="0.32827735" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4978678" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5042644" side_tool="true" visible="true" weight="0.37703142" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49200428" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -453,49 +471,91 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java</url>
-          <line>163</line>
+          <line>161</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java</url>
-          <line>111</line>
+          <line>109</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java</url>
-          <line>116</line>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
-          <line>216</line>
-          <properties />
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
-          <line>178</line>
+          <line>315</line>
           <properties />
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
+          <line>143</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
+          <line>160</line>
+          <properties />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
+          <line>187</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java</url>
+          <line>74</line>
+          <properties />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/Common/CommonAttributes.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Pixel/Pixel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+          <folding>
+            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#891#892#0" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+            <element signature="e#1029#1030#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/APIRequest/APIRequestCommands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -504,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Common/CommonElements.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="1088">
           <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -520,54 +580,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/APIRequest/APIRequestCommands.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/Random_TDG.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+        <state relative-caret-position="369">
+          <caret line="53" column="74" lean-forward="true" selection-start-line="53" selection-start-column="74" selection-end-line="53" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Pixel/Pixel.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
-          <folding>
-            <element signature="e#633#634#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
-            <element signature="e#865#866#0" expanded="true" />
-            <element signature="e#891#892#0" expanded="true" />
-            <element signature="e#922#923#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="e#1029#1030#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="129">
+          <caret line="149" column="28" lean-forward="true" selection-start-line="149" selection-start-column="28" selection-end-line="149" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/HillClimbing_TDG.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="28" selection-start-line="28" selection-end-line="45" selection-end-column="17" />
+        <state relative-caret-position="411">
+          <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/TestDataGenerationSystem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+        <state relative-caret-position="315">
+          <caret line="89" column="10" lean-forward="true" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -576,13 +619,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/SearchStrategies/Custom_TDG.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="751">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        <state relative-caret-position="164">
+          <caret line="271" selection-start-line="271" selection-end-line="271" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#544#551#0" expanded="true" />
-            <element signature="e#1151#1158#0" expanded="true" />
-            <element signature="e#3835#3842#0" expanded="true" />
+            <element signature="e#604#611#0" expanded="true" />
+            <element signature="e#680#687#0" expanded="true" />
           </folding>
         </state>
       </provider>

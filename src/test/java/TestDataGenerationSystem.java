@@ -64,18 +64,19 @@ public class TestDataGenerationSystem {
 
 
                 currentPixel = common.setRandomRGB(currentPixel);
-
+                int fitness = 0;
                 if (common.putPixel(currentPixel)) {
                     response = common.getPixel(currentPixel);
                     gridValuesValid = common.comparePixel(response, currentPixel);
                     if (!gridValuesValid){
                         displayBugs.add(currentPixel);
                         System.out.println("x" + currentPixel.getX()+ "y " + currentPixel.getY());
-
+                        fitness = (Integer) response.getBody().getObject().get("fitness");
+                    } else {
+                        fitness = 0;
                     }
 
                     if(strategySelection==1){
-                        int fitness = (Integer) response.getBody().getObject().get("fitness");
                         currentPoints.get(0).setFitness(fitness);
                     }
 

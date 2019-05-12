@@ -107,8 +107,6 @@ public class HillClimbing_TDG {
 
             }
 
-
-
             if(samePoints == currentGrid.size()){
             currentGrid =   defaultGridValues(length, width,3,3);
                 return  currentGrid;
