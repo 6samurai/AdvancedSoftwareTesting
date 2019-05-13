@@ -30,7 +30,11 @@ class Custom_TDG {
 
     private void resetAttributes(){
         Custom_TDG custom_tdg_method = new Custom_TDG();
+        currentPoints.clear();
+        originalPoints.clear();
+        initialPoint = null;
         currentPoints =  custom_tdg_method.defaultGridValues(common.getLength(), common.getWidth());
+
 
         for (int i = 0; i < currentPoints.size(); i++) {
             Pixel newPixel = new Pixel();
@@ -49,7 +53,7 @@ class Custom_TDG {
             //  List<Pixel> currentPoints = null;
             // List<Pixel> originalPoints = null;
             //   CommonElements common = new CommonElements();
-            Custom_TDG custom_tdg_method = new Custom_TDG();
+           // Custom_TDG custom_tdg_method = new Custom_TDG();
 
             List<Pixel> displayBugs = new ArrayList<Pixel>();
             HttpResponse<JsonNode> response = null;
@@ -70,6 +74,7 @@ class Custom_TDG {
             int new_y = 0;
             boolean changeDirection = false;
 
+            //delete any previous entries
             System.out.println(api_Request.DELETE().getStatus());
 
             for (int i = 0; i < maxIteration; i++) {
@@ -127,6 +132,12 @@ class Custom_TDG {
                                 Comparator<Pixel> compareByFitness = (Pixel o1, Pixel o2) -> ((Integer) o1.getFitness()).compareTo( (Integer) o2.getFitness() );
                                 Collections.sort(currentPoints, compareByFitness.reversed());
                                 originalPoints = copyPixelArrayList(currentPoints,originalPoints);
+                                currentPoints.remove(0);
+                                originalPoints.remove(0);
+                                currentPoints.remove(0);
+                                originalPoints.remove(0);
+                                currentPoints.remove(0);
+                                originalPoints.remove(0);
 
                             } else{
                                 //reset current point selection
@@ -149,11 +160,12 @@ class Custom_TDG {
                                 resetAttributes();
                                 findInitialPoints = true;
                             }
-                        } else if  (!changeDirection && currentPoints.get(0).getFitness()==0){
+                        } else if  ((!changeDirection && currentPoints.get(0).getFitness()==0) ||  currentPoints.get(0).getX()==common.getWidth()-1 ||currentPoints.get(0).getY()==common.getLength()-1 || currentPoints.get(0).getX()==0 ||currentPoints.get(0).getY()==0 ){
 
                             if(direction_x ==0 && direction_y<0){
 
                                // direction_x = -1;
+
                                 max_direction = currentPoints.get(0).getY();
                                 quadrant = 1;
 
@@ -172,6 +184,16 @@ class Custom_TDG {
                             //    direction_y = -1;
                                 max_direction = currentPoints.get(0).getX();
                                 quadrant = 4;
+                            }
+
+                            //to include 1199 and 1599 respectively
+                            if( max_direction==common.getWidth()-1 ||currentPoints.get(0).getY()==common.getLength()-1 )  {
+                                max_direction++;
+
+                            }
+                            //to include point zero
+                            else if (max_direction==0 ){
+                                max_direction = -1;
                             }
 
                             changeDirection = true;
@@ -194,7 +216,7 @@ class Custom_TDG {
 
                                        /*     currentPoints.get(0).setY(originalPoints.get(0).getY());
                                             currentPoints.get(0).setX(currentPoints.get(0).getX()-1 );*/
-                                        } else if(currentPoints.get(0).getY() == max_direction  || currentPoints.get(0).getY() == max_direction +1){
+                                        } else if(currentPoints.get(0).getY() == max_direction || currentPoints.get(0).getY() == max_direction +1  ){
                                             direction_x = 0;
                                             direction_y = 0;
                                            currentPoints.get(0).setX(currentPoints.get(0).getX()-1);
@@ -209,7 +231,7 @@ class Custom_TDG {
                                             direction_y = 1;
                                           /*  currentPoints.get(0).setY(originalPoints.get(0).getY());
                                             currentPoints.get(0).setX(  currentPoints.get(0).getX()+1);*/
-                                        }else if(currentPoints.get(0).getY() == max_direction || currentPoints.get(0).getY() == max_direction -1){
+                                        }else if(currentPoints.get(0).getY() == max_direction  || currentPoints.get(0).getY() == max_direction-1){
                                             direction_x = 0;
                                             direction_y = 0;
                                             currentPoints.get(0).setX(currentPoints.get(0).getX()+1);
@@ -219,11 +241,11 @@ class Custom_TDG {
 
                                     case 3:
                                         if(currentPoints.get(0).getX() > max_direction+1){
-                                            direction_x = 1;
+                                            direction_x = -1;
                                             direction_y = 0;
                                          /*   currentPoints.get(0).setX(originalPoints.get(0).getX());
                                             currentPoints.get(0).setY(  currentPoints.get(0).getY()+1);*/
-                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction+1){
+                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction +1){
                                             direction_x = 0;
                                             direction_y = 0;
                                             currentPoints.get(0).setX(originalPoints.get(0).getX());
@@ -232,11 +254,11 @@ class Custom_TDG {
                                         break;
                                     case  4:
                                         if(currentPoints.get(0).getX() < max_direction -1 ){
-                                            direction_x = -1;
+                                            direction_x = 1;
                                             direction_y = 0;
                                           /*  currentPoints.get(0).setX(originalPoints.get(0).getX());
                                             currentPoints.get(0).setY(  currentPoints.get(0).getY()-1);*/
-                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction-1){
+                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction -1 ){
                                             direction_x = 0;
                                             direction_y = 0;
                                             currentPoints.get(0).setX(originalPoints.get(0).getX());
