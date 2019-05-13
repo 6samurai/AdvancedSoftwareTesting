@@ -56,7 +56,7 @@ class Custom_TDG {
             boolean gridValuesValid = false;
 
             boolean  findInitialPoints = true;
-            boolean changeDirection = false;
+
             int currentFitness = -2;
             int totalFitness = -2;
             int identifiedInitialPoints = 0;
@@ -68,7 +68,7 @@ class Custom_TDG {
             int quadrant = 0;
             int new_x = 0;
             int new_y = 0;
-
+            boolean changeDirection = false;
 
             System.out.println(api_Request.DELETE().getStatus());
 
@@ -77,12 +77,11 @@ class Custom_TDG {
                 //initial random selection of point
                 if (currentPoints == null || currentPoints.size()==0) {
                     resetAttributes();
-               /*     currentPoints = defaultGridValues(common.getLength(), common.getWidth());
-                    Collections.copy(originalPoints, currentPoints);
-                    //  originalPoints = currentPoints;
-                    initialPoint = currentPoints.get(0);*/
                     findInitialPoints = true;
+
                 } else{
+
+                    //selecting initial points to start evaluation of quadrants
                     if(findInitialPoints){
 
                         identifiedInitialPoints = 0;
@@ -95,15 +94,15 @@ class Custom_TDG {
                                 //if initial point has a fitness value of zero - select new point
                                 if(j ==0 && currentFitness==0 && currentPoints.get(0).equals(initialPoint) ){
                                     currentPoints = defaultGridValues(common.getLength(), common.getWidth());
-                                    //  originalPoints = currentPoints;
                                     initialPoint = currentPoints.get(0);
                                     findInitialPoints = true;
                                     break;
+
                                 } else if (j == 0 && currentPoints.get(0).equals(initialPoint)) {
                                     //to exclude original point for direction selection
                                     currentPoints.remove(0);
-
                                     break;
+
                                 }else
                                     //verify that the fitness present for selected points is greater than zero
                                     totalFitness = totalFitness + currentFitness;
@@ -113,7 +112,6 @@ class Custom_TDG {
                                 // to swap point to first in list - to evaluate fitness value
                                 if(j!=0)
                                     Collections.swap(currentPoints, 0, j);
-
 
                                 break;
                             } else{
@@ -129,8 +127,7 @@ class Custom_TDG {
                                 Comparator<Pixel> compareByFitness = (Pixel o1, Pixel o2) -> ((Integer) o1.getFitness()).compareTo( (Integer) o2.getFitness() );
                                 Collections.sort(currentPoints, compareByFitness.reversed());
                                 originalPoints = copyPixelArrayList(currentPoints,originalPoints);
-                              //  Collections.copy(originalPoints, currentPoints);
-                                //  originalPoints = currentPoints;
+
                             } else{
                                 //reset current point selection
                                 currentPoints = defaultGridValues(common.getLength(), common.getWidth());
@@ -138,7 +135,7 @@ class Custom_TDG {
                                 initialPoint = currentPoints.get(0);
                             }
                         }
-
+                    //handle the traversal
                     } else{
 
                         //when all possible bugs present in the specified quadrant have been identified, remove that specific entry
@@ -150,76 +147,105 @@ class Custom_TDG {
 
                             if(currentPoints.size() ==0 ){
                                 resetAttributes();
-                            /*    currentPoints = defaultGridValues(common.getLength(), common.getWidth());
-                                //  originalPoints = currentPoints;
-                                Collections.copy(originalPoints, currentPoints);
-                                initialPoint = currentPoints.get(0);*/
                                 findInitialPoints = true;
                             }
                         } else if  (!changeDirection && currentPoints.get(0).getFitness()==0){
 
                             if(direction_x ==0 && direction_y<0){
 
-                                direction_x = -1;
-                                max_direction = currentPoints.get(0).getY()+1;
+                               // direction_x = -1;
+                                max_direction = currentPoints.get(0).getY();
                                 quadrant = 1;
 
                             } else if(direction_x ==0 && direction_y>0){
-                                direction_x = 1;
-                                max_direction = currentPoints.get(0).getY()-1;
+                             //  direction_x = 1;
+                                max_direction = currentPoints.get(0).getY();
                                 quadrant = 2;
 
                             }else if(direction_x <0 && direction_y==0){
 
-                                direction_y = 1;
-                                max_direction = currentPoints.get(0).getX()+1;
+                             //   direction_y = 1;
+                                max_direction = currentPoints.get(0).getX();
                                 quadrant = 3;
 
                             }else if(direction_x >0 && direction_y==0){
-                                direction_y = -1;
-                                max_direction = currentPoints.get(0).getX()-1;
+                            //    direction_y = -1;
+                                max_direction = currentPoints.get(0).getX();
                                 quadrant = 4;
                             }
 
                             changeDirection = true;
                         }
 
-                        if(currentPoints.get(0).getFitness()!=0 && currentPoints.get(0).getFitness()!= -2 ){
+                        if( currentPoints.get(0).getFitness()!= -2 ){
+                     //   if(currentPoints.get(0).getFitness()!=0 && currentPoints.get(0).getFitness()!= -2 ){
                             //determine direction to follow based on largest fitness value
                             if(!changeDirection){
                                 direction_x = originalPoints.get(0).getX() - initialPoint.getX();
                                 direction_y = originalPoints.get(0).getY() - initialPoint.getY();
 
+
                             }else{
                                 switch (quadrant){
                                     case 1:
-                                        if(currentPoints.get(0).getY() == max_direction){
-                                            currentPoints.get(0).setY(initialPoint.getY());
-                                            currentPoints.get(0).setX(  currentPoints.get(0).getX()-1);
+                                        if(currentPoints.get(0).getY() > max_direction +1){
+                                            direction_x = 0;
+                                            direction_y = -1;
+
+                                       /*     currentPoints.get(0).setY(originalPoints.get(0).getY());
+                                            currentPoints.get(0).setX(currentPoints.get(0).getX()-1 );*/
+                                        } else if(currentPoints.get(0).getY() == max_direction  || currentPoints.get(0).getY() == max_direction +1){
+                                            direction_x = 0;
+                                            direction_y = 0;
+                                           currentPoints.get(0).setX(currentPoints.get(0).getX()-1);
+                                           currentPoints.get(0).setY(originalPoints.get(0).getY());
                                         }
                                         break;
 
                                     case 2:
-                                        if(currentPoints.get(0).getY() == max_direction){
-                                            currentPoints.get(0).setY(initialPoint.getY());
-                                            currentPoints.get(0).setX(  currentPoints.get(0).getX()+1);
+
+                                        if(currentPoints.get(0).getY() < max_direction-1){
+                                            direction_x = 0;
+                                            direction_y = 1;
+                                          /*  currentPoints.get(0).setY(originalPoints.get(0).getY());
+                                            currentPoints.get(0).setX(  currentPoints.get(0).getX()+1);*/
+                                        }else if(currentPoints.get(0).getY() == max_direction || currentPoints.get(0).getY() == max_direction -1){
+                                            direction_x = 0;
+                                            direction_y = 0;
+                                            currentPoints.get(0).setX(currentPoints.get(0).getX()+1);
+                                            currentPoints.get(0).setY(originalPoints.get(0).getY());
                                         }
                                         break;
 
                                     case 3:
-                                        if(currentPoints.get(0).getX() == max_direction){
-                                            currentPoints.get(0).setX(initialPoint.getX());
-                                            currentPoints.get(0).setY(  currentPoints.get(0).getY()+1);
+                                        if(currentPoints.get(0).getX() > max_direction+1){
+                                            direction_x = 1;
+                                            direction_y = 0;
+                                         /*   currentPoints.get(0).setX(originalPoints.get(0).getX());
+                                            currentPoints.get(0).setY(  currentPoints.get(0).getY()+1);*/
+                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction+1){
+                                            direction_x = 0;
+                                            direction_y = 0;
+                                            currentPoints.get(0).setX(originalPoints.get(0).getX());
+                                            currentPoints.get(0).setY(currentPoints.get(0).getY()+1);
                                         }
                                         break;
                                     case  4:
-                                        if(currentPoints.get(0).getX() == max_direction){
-                                            currentPoints.get(0).setX(initialPoint.getX());
-                                            currentPoints.get(0).setY(  currentPoints.get(0).getY()-1);
+                                        if(currentPoints.get(0).getX() < max_direction -1 ){
+                                            direction_x = -1;
+                                            direction_y = 0;
+                                          /*  currentPoints.get(0).setX(originalPoints.get(0).getX());
+                                            currentPoints.get(0).setY(  currentPoints.get(0).getY()-1);*/
+                                        }else if(currentPoints.get(0).getX() == max_direction || currentPoints.get(0).getX() == max_direction-1){
+                                            direction_x = 0;
+                                            direction_y = 0;
+                                            currentPoints.get(0).setX(originalPoints.get(0).getX());
+                                            currentPoints.get(0).setY(currentPoints.get(0).getY()-1);
                                         }
                                         break;
                                 }
                             }
+
 
                             prev_x =  currentPoints.get(0).getX();
                             prev_y =  currentPoints.get(0).getY();
@@ -227,27 +253,21 @@ class Custom_TDG {
                             new_x = prev_x + direction_x;
                             new_y = prev_y + direction_y;
 
-                            if(new_x>0 && new_x<common.getWidth() && new_y>0 && new_y<common.getLength()){
-                                currentPoints.get(0).setX(new_x);
+                            if((new_x>0 && new_x<common.getWidth() && new_y>0 && new_y<common.getLength())){
                                 currentPoints.get(0).setY(new_y);
+                                currentPoints.get(0).setX(new_x);
 
                             } else{
                                 resetAttributes();
-                             /*   currentPoints = defaultGridValues(common.getLength(), common.getWidth());
-                                //   originalPoints = currentPoints;
-                                Collections.copy(originalPoints, currentPoints);
-                                initialPoint = currentPoints.get(0);*/
                                 findInitialPoints = true;
 
                             }
-
-
                         }
                     }
                 }
 
                 // currentPixel = common.setRandomRGB(currentPixel);
-                int fitness = 0;
+                int fitness;
                 if (common.putPixel(currentPoints.get(0))) {
                     response = common.getPixel(currentPoints.get(0));
                     gridValuesValid = common.comparePixel(response, currentPoints.get(0));
