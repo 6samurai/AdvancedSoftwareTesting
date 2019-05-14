@@ -13,9 +13,9 @@ public class CommonElements {
 
     private String url = "https://virtualscreen.azurewebsites.net/api/pixels" ;
     private String sessionID = "74993M";
-    private int y_axis = 1200;
-    private int x_axis = 1600;
-    private int maxRGB = 256;
+    private int y_axis = 1201;//y-axis upper limit - range of y-axis is between 0 to 1200 inclusively
+    private int x_axis = 1601;//x-axis upper limit - range of x-axis is between 0 to 1600 inclusively
+    private int maxRGB = 256; // range of rgb colours is between 0 to 255 inclusively
 
     public String getUrl() {
         return url;

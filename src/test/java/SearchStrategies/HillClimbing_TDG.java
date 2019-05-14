@@ -21,6 +21,8 @@ public class HillClimbing_TDG {
             int largestFitness_ID = 0;
 
             List<Pixel> newGrid = new ArrayList<Pixel>();
+
+            //for initial case where no points are evaluated
             if(currentGrid ==null){
                 currentGrid = defaultGridValues(length, width,3,3);
                 return  currentGrid;
@@ -29,7 +31,7 @@ public class HillClimbing_TDG {
                 for(int i = 0; i <currentGrid.size();i++){
                     currentFitness = currentGrid.get(i).getFitness();
                     //ignore default values
-                    if(currentFitness!=-2)
+                    if(currentFitness!=-2 && currentFitness!=largestFitness)
                         fitnessCount+= currentFitness;
 
                     if(currentFitness==-2){
@@ -54,7 +56,7 @@ public class HillClimbing_TDG {
             //point with largest fitness set as first entry of list
             Collections.swap(currentGrid, 0, largestFitness_ID);
 
-            //move grid to consider points neighbouring new max point
+            // populate points neighbouring new max point
             x = currentGrid.get(0).getX();
             y = currentGrid.get(0).getY();
             int new_x = x;
@@ -108,23 +110,18 @@ public class HillClimbing_TDG {
             }
 
             if(samePoints == currentGrid.size()){
-            currentGrid =   defaultGridValues(length, width,3,3);
+                currentGrid =   defaultGridValues(length, width,3,3);
                 return  currentGrid;
             } else{
 
                 Collections.swap(newGrid, 0, swap_id);
-
                 return newGrid ;
             }
-
 
         } catch (Exception e) {
             return  null;
         }
-
     }
-
-
 
     public List<Pixel> defaultGridValues(int length, int width, int max_i, int max_j){
 
@@ -156,23 +153,6 @@ public class HillClimbing_TDG {
                 }
             }
         }
-
         return  newGrid;
-
-    /*    for(int i =0;i<3;i++){
-            for(int j =0; j<3;j++){
-                new_x = x + i;
-                new_y = y + j;
-                if(new_x<width && new_y<length){
-                    Pixel currentPixel = new Pixel();
-                    currentPixel = currentPixel.defaultPixel();
-                    currentPixel.setY(new_y);
-                    currentPixel.setX(new_x);
-                    newGrid.add(currentPixel);
-                }
-            }
-        }*/
-
-
     }
 }

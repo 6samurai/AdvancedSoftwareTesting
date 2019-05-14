@@ -26,7 +26,7 @@ class Custom_TDG {
     private ArrayList<Pixel> originalPoints = new ArrayList<Pixel>();
     private Pixel initialPoint =null;
 
-    private int maxIteration = 2000;
+    private int maxIteration = 50000;
 
     private void resetAttributes(){
         Custom_TDG custom_tdg_method = new Custom_TDG();
@@ -132,12 +132,12 @@ class Custom_TDG {
                                 Comparator<Pixel> compareByFitness = (Pixel o1, Pixel o2) -> ((Integer) o1.getFitness()).compareTo( (Integer) o2.getFitness() );
                                 Collections.sort(currentPoints, compareByFitness.reversed());
                                 originalPoints = copyPixelArrayList(currentPoints,originalPoints);
-                                currentPoints.remove(0);
+                              /*  currentPoints.remove(0);
                                 originalPoints.remove(0);
                                 currentPoints.remove(0);
                                 originalPoints.remove(0);
                                 currentPoints.remove(0);
-                                originalPoints.remove(0);
+                                originalPoints.remove(0);*/
 
                             } else{
                                 //reset current point selection
@@ -295,7 +295,7 @@ class Custom_TDG {
                     gridValuesValid = common.comparePixel(response, currentPoints.get(0));
                     if (!gridValuesValid) {
                         displayBugs.add(currentPoints.get(0));
-                        System.out.println("x" + currentPoints.get(0).getX() + "y " + currentPoints.get(0).getY());
+                        System.out.println("x" + currentPoints.get(0).getX() + " y " + currentPoints.get(0).getY());
                         fitness = (Integer) response.getBody().getObject().get("fitness");
 
                     } else{
@@ -335,11 +335,11 @@ class Custom_TDG {
     public ArrayList<Pixel> defaultGridValues(int length, int width) {
 
         CommonElements commonElements = new CommonElements();
-      //  int x = commonElements.randomWidthPoint();
-      //  int y = commonElements.randomLengthPoint();
+        int x = commonElements.randomWidthPoint();
+        int y = commonElements.randomLengthPoint();
 
-        int x = 1114;
-        int y = 1129;
+     //   int x = 1114;
+     //   int y = 1129;
 
         int new_x = x;
         int new_y = y;

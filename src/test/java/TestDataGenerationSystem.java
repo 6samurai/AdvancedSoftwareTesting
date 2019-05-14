@@ -70,7 +70,7 @@ public class TestDataGenerationSystem {
                     gridValuesValid = common.comparePixel(response, currentPixel);
                     if (!gridValuesValid){
                         displayBugs.add(currentPixel);
-                        System.out.println("x" + currentPixel.getX()+ "y " + currentPixel.getY());
+                        System.out.println("x" + currentPixel.getX()+ " y " + currentPixel.getY());
                         fitness = (Integer) response.getBody().getObject().get("fitness");
                     } else {
                         fitness = 0;
