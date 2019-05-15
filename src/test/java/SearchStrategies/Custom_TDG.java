@@ -6,6 +6,7 @@ import Pixel.Pixel;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,12 +29,12 @@ class Custom_TDG {
 
     private int maxIteration = 50000;
 
-    private void resetAttributes(){
+    private void selectNewPoint(ArrayList <Pixel> bugList){
         Custom_TDG custom_tdg_method = new Custom_TDG();
         currentPoints.clear();
         originalPoints.clear();
         initialPoint = null;
-        currentPoints =  custom_tdg_method.defaultGridValues(common.getLength(), common.getWidth());
+        currentPoints =  custom_tdg_method.defaultGridValues(common.getLength(), common.getWidth(),bugList);
 
 
         for (int i = 0; i < currentPoints.size(); i++) {
@@ -55,7 +56,7 @@ class Custom_TDG {
             //   CommonElements common = new CommonElements();
            // Custom_TDG custom_tdg_method = new Custom_TDG();
 
-            List<Pixel> displayBugs = new ArrayList<Pixel>();
+            ArrayList<Pixel> displayBugs = new ArrayList<Pixel>();
             HttpResponse<JsonNode> response = null;
             boolean gridValuesValid = false;
 
@@ -73,6 +74,7 @@ class Custom_TDG {
             int new_x = 0;
             int new_y = 0;
             boolean changeDirection = false;
+            Pixel bugPixel = new Pixel();
 
             //delete any previous entries
             System.out.println(api_Request.DELETE().getStatus());
@@ -81,7 +83,7 @@ class Custom_TDG {
 
                 //initial random selection of point
                 if (currentPoints == null || currentPoints.size()==0) {
-                    resetAttributes();
+                    selectNewPoint(displayBugs);
                     findInitialPoints = true;
 
                 } else{
@@ -93,12 +95,28 @@ class Custom_TDG {
                         totalFitness = 0;
                         for(int j = 0; j <currentPoints.size();j++){
                             currentFitness = currentPoints.get(j).getFitness();
-                            //ignore default values
-                            if(currentFitness!=-2 ){
+
+                            bugPixel = common.lookupPixel(currentPoints.get(j).getX(),currentPoints.get(j).getY(),displayBugs);
+                            //if chosen points have already been processed
+                            if(bugPixel != null &&  !currentPoints.get(0).equals(initialPoint) && currentPoints.get(j).getFitness()==-2){
+                                //if initial point is already recorded
+                                if(j ==0 ) {
+                                    currentPoints = defaultGridValues(common.getLength(), common.getWidth(), displayBugs);
+                                    initialPoint = currentPoints.get(0);
+                                    findInitialPoints = true;
+                                    break;
+                                }
+
+                                currentPoints.remove(j);
+                                bugPixel = null;
+                                break;
+
+
+                            } else if(currentFitness!=-2 ){
 
                                 //if initial point has a fitness value of zero - select new point
                                 if(j ==0 && currentFitness==0 && currentPoints.get(0).equals(initialPoint) ){
-                                    currentPoints = defaultGridValues(common.getLength(), common.getWidth());
+                                    currentPoints = defaultGridValues(common.getLength(), common.getWidth(),displayBugs);
                                     initialPoint = currentPoints.get(0);
                                     findInitialPoints = true;
                                     break;
@@ -111,17 +129,15 @@ class Custom_TDG {
                                 }else
                                     //verify that the fitness present for selected points is greater than zero
                                     totalFitness = totalFitness + currentFitness;
-                            }
-
-                            if(currentFitness==-2){
+                            } else {
                                 // to swap point to first in list - to evaluate fitness value
                                 if(j!=0)
                                     Collections.swap(currentPoints, 0, j);
-
                                 break;
-                            } else{
-                                identifiedInitialPoints ++;
                             }
+
+                            identifiedInitialPoints ++;
+
                         }
 
                         if(identifiedInitialPoints == currentPoints.size()){
@@ -132,6 +148,7 @@ class Custom_TDG {
                                 Comparator<Pixel> compareByFitness = (Pixel o1, Pixel o2) -> ((Integer) o1.getFitness()).compareTo( (Integer) o2.getFitness() );
                                 Collections.sort(currentPoints, compareByFitness.reversed());
                                 originalPoints = copyPixelArrayList(currentPoints,originalPoints);
+                                continue;
                               /*  currentPoints.remove(0);
                                 originalPoints.remove(0);
                                 currentPoints.remove(0);
@@ -141,7 +158,7 @@ class Custom_TDG {
 
                             } else{
                                 //reset current point selection
-                                currentPoints = defaultGridValues(common.getLength(), common.getWidth());
+                                currentPoints = defaultGridValues(common.getLength(), common.getWidth(),displayBugs);
                                 // originalPoints = currentPoints;
                                 initialPoint = currentPoints.get(0);
                             }
@@ -157,10 +174,12 @@ class Custom_TDG {
                             quadrant = 0;
 
                             if(currentPoints.size() ==0 ){
-                                resetAttributes();
+                                selectNewPoint(displayBugs);
                                 findInitialPoints = true;
                             }
-                        } else if  ((!changeDirection && currentPoints.get(0).getFitness()==0) ||  currentPoints.get(0).getX()==common.getWidth()-1 ||currentPoints.get(0).getY()==common.getLength()-1 || currentPoints.get(0).getX()==0 ||currentPoints.get(0).getY()==0 ){
+                        } else if  ((!changeDirection && currentPoints.get(0).getFitness()==0)
+                                ||  currentPoints.get(0).getX()==common.getWidth()-1 ||currentPoints.get(0).getY()==common.getLength()-1
+                                || currentPoints.get(0).getX()==0 ||currentPoints.get(0).getY()==0 ){
 
                             if(direction_x ==0 && direction_y<0){
 
@@ -208,6 +227,14 @@ class Custom_TDG {
 
 
                             }else{
+/*
+                                bugPixel = common.lookupPixel(currentPoints.get(0).getX(),currentPoints.get(0).getY(),displayBugs);
+                                //if chosen points have already been processed
+                                if(bugPixel != null){
+
+
+                                }*/
+
                                 switch (quadrant){
                                     case 1:
                                         if(currentPoints.get(0).getY() > max_direction +1){
@@ -268,7 +295,6 @@ class Custom_TDG {
                                 }
                             }
 
-
                             prev_x =  currentPoints.get(0).getX();
                             prev_y =  currentPoints.get(0).getY();
 
@@ -280,7 +306,7 @@ class Custom_TDG {
                                 currentPoints.get(0).setX(new_x);
 
                             } else{
-                                resetAttributes();
+                                selectNewPoint(displayBugs);
                                 findInitialPoints = true;
 
                             }
@@ -293,19 +319,23 @@ class Custom_TDG {
                 if (common.putPixel(currentPoints.get(0))) {
                     response = common.getPixel(currentPoints.get(0));
                     gridValuesValid = common.comparePixel(response, currentPoints.get(0));
-                    if (!gridValuesValid) {
-                        displayBugs.add(currentPoints.get(0));
+
+                    //checks if the selected point was already serviced
+                    bugPixel = common.lookupPixel(currentPoints.get(0).getX(),currentPoints.get(0).getY(),displayBugs);
+
+                    if (!gridValuesValid &&  bugPixel == null) {
+                        addPixelToList(displayBugs,currentPoints.get(0));
+                       // displayBugs.add(currentPoints.get(0));
                         System.out.println("x" + currentPoints.get(0).getX() + " y " + currentPoints.get(0).getY());
                         fitness = (Integer) response.getBody().getObject().get("fitness");
 
-                    } else{
+                    }
+                    else{
+
+                        System.out.println("bug pixel " + bugPixel );
                         fitness = 0;
                     }
-
-
-
                     currentPoints.get(0).setFitness(fitness);
-
 
                 } else {
                     throw new Exception("Put pixel operation failed");
@@ -313,6 +343,7 @@ class Custom_TDG {
             }
 
             System.out.println("Bugs detected :" + displayBugs.size());
+            System.out.println(api_Request.DELETE().getStatus());
         } catch (Exception e) {
             System.out.println("An error has occurred: " +e.getMessage() );
         }
@@ -332,18 +363,44 @@ class Custom_TDG {
         return  copyToList;
     }
 
-    public ArrayList<Pixel> defaultGridValues(int length, int width) {
+    public ArrayList<Pixel> addPixelToList(ArrayList<Pixel> originalList, Pixel addPixel){
+        Pixel newPixel = new Pixel();
+        newPixel.setX(addPixel.getX());
+        newPixel.setY(addPixel.getY());
+        newPixel.setR(addPixel.getR());
+        newPixel.setG(addPixel.getG());
+        newPixel.setB(addPixel.getB());
+        newPixel.setFitness(addPixel.getFitness());
+
+        originalList.add(newPixel);
+        return  originalList;
+    }
+
+    public ArrayList<Pixel> defaultGridValues(int length, int width, ArrayList<Pixel> bugList) {
 
         CommonElements commonElements = new CommonElements();
         int x = commonElements.randomWidthPoint();
         int y = commonElements.randomLengthPoint();
-
+        Pixel bugPixel =  common.lookupPixel(x,y,bugList);
      //   int x = 1114;
      //   int y = 1129;
 
+
+        ArrayList<Pixel> newGrid = new ArrayList<Pixel>();
+        int counter  =0;
+        do{
+            if(bugList!=null){
+                x = commonElements.randomWidthPoint();
+                y = commonElements.randomLengthPoint();
+                bugPixel = common.lookupPixel(x,y,bugList);
+
+            }
+            counter++;
+
+        }while (bugPixel!=null || counter <10);
+
         int new_x = x;
         int new_y = y;
-        ArrayList<Pixel> newGrid = new ArrayList<Pixel>();
 
         Pixel currentPixel = new Pixel();
         currentPixel.setY(new_y);
@@ -351,26 +408,6 @@ class Custom_TDG {
         currentPixel.setFitness(-2);
         currentPixel =  commonElements.setRandomRGB(currentPixel);
         newGrid.add(currentPixel); //initial point of (x,y)
-
-       /* for (int i = 0; i < max_i; i++) {
-            for (int j = 0; j < max_j; j++) {
-
-                if(i ==0)
-                    new_x = x + (int) Math.pow(-1, i);
-               else
-                    new_y = y + (int) Math.pow(-1, j);
-
-                if (new_x < width && new_y < length) {
-                    currentPixel = new Pixel();
-                    currentPixel.setY(new_y);
-                    currentPixel.setX(new_x);
-                    currentPixel.setFitness(-2);
-                    currentPixel =  commonElements.setRandomRGB(currentPixel);
-                    newGrid.add(currentPixel);
-
-                }
-            }
-        }*/
 
        for(int i= 0; i<4;i++){
            new_x = x;
@@ -394,10 +431,6 @@ class Custom_TDG {
            }
        }
         return newGrid;
-
-
     }
-
-
 }
 

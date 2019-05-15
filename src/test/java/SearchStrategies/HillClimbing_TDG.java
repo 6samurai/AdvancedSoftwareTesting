@@ -1,5 +1,6 @@
 package SearchStrategies;
 
+import APIRequest.APIRequestCommands;
 import Common.CommonElements;
 import Pixel.Pixel;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class HillClimbing_TDG {
 
-    public List<Pixel> HillClimbing_TDG_Method (List<Pixel> currentGrid, int length, int width ) {
+    public List<Pixel> HillClimbing_TDG_Method (List<Pixel> currentGrid, int length, int width  ,  List<Pixel> bugList) {
         try {
 
             Pixel currentPixel = new Pixel();
@@ -37,7 +38,7 @@ public class HillClimbing_TDG {
                     if(currentFitness==-2){
                         if(i!=0)
                             Collections.swap(currentGrid, 0, i);
-
+                        //return point to be evaluated for fitness
                         return  currentGrid;
                     }
 
@@ -46,7 +47,7 @@ public class HillClimbing_TDG {
                         largestFitness_ID = i;
                     }
                 }
-
+                //if current set of points considered produced no bugs
                 if(fitnessCount==0){
                     currentGrid = defaultGridValues(length, width,3,3);
                     return  currentGrid;
@@ -62,6 +63,7 @@ public class HillClimbing_TDG {
             int new_x = x;
             int new_y = y;
 
+            //created new grid relative to point with highest fitness value
             for(int i =0;i<3;i++){
                 for(int j =0; j<3;j++){
 
@@ -82,13 +84,14 @@ public class HillClimbing_TDG {
                     }
                 }
             }
-
+            //new grid generated is compared to current grid - any points similar to each are set with the same attributes
             int samePoints = 0;
             int x_currentGrid ;
             int y_currentGrid;
             int x_newGrid;
             int y_newGrid;
             int swap_id = -1;
+            Pixel findInBugList = null;
             for(int i =0; i<currentGrid.size();i++){
                 x_currentGrid = currentGrid.get(i).getX();
                 y_currentGrid = currentGrid.get(i).getY();
@@ -96,7 +99,12 @@ public class HillClimbing_TDG {
                     x_newGrid = newGrid.get(j).getX();
                     y_newGrid = newGrid.get(j).getY();
 
-                    if(x_currentGrid==x_newGrid && y_currentGrid==y_newGrid){
+                    findInBugList = common.lookupPixel(x_newGrid, y_newGrid,bugList);
+
+                    if(findInBugList != null){
+                        newGrid.get(j).setPixel(findInBugList,  newGrid.get(j));
+
+                    } else if(x_currentGrid==x_newGrid && y_currentGrid==y_newGrid){
                         newGrid.get(j).setPixel(currentGrid.get(i),  newGrid.get(j));
 
                         samePoints++;
@@ -108,12 +116,12 @@ public class HillClimbing_TDG {
                 }
 
             }
-
-            if(samePoints == currentGrid.size()){
+            //if all of the point of the new grid correspond to the
+            if(samePoints == currentGrid.size() || swap_id==-1){
                 currentGrid =   defaultGridValues(length, width,3,3);
                 return  currentGrid;
             } else{
-
+                //swap a point to top of list to be evaluated
                 Collections.swap(newGrid, 0, swap_id);
                 return newGrid ;
             }
@@ -122,6 +130,7 @@ public class HillClimbing_TDG {
             return  null;
         }
     }
+
 
     public List<Pixel> defaultGridValues(int length, int width, int max_i, int max_j){
 

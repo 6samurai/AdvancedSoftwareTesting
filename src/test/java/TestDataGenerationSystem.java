@@ -46,7 +46,7 @@ public class TestDataGenerationSystem {
                     //Hill Climbing
                     case 1:
                         HillClimbing_TDG hillClimbing_tdg = new HillClimbing_TDG();
-                        currentPoints = hillClimbing_tdg.HillClimbing_TDG_Method(currentPoints,common.getLength(), common.getWidth());
+                        currentPoints = hillClimbing_tdg.HillClimbing_TDG_Method(currentPoints,common.getLength(), common.getWidth(),displayBugs);
                         currentPixel = currentPoints.get(0);
 
                         break;
@@ -70,7 +70,7 @@ public class TestDataGenerationSystem {
                     gridValuesValid = common.comparePixel(response, currentPixel);
                     if (!gridValuesValid){
                         displayBugs.add(currentPixel);
-                        System.out.println("x" + currentPixel.getX()+ " y " + currentPixel.getY());
+                        System.out.println("x " + currentPixel.getX()+ " y " + currentPixel.getY());
                         fitness = (Integer) response.getBody().getObject().get("fitness");
                     } else {
                         fitness = 0;
@@ -88,6 +88,7 @@ public class TestDataGenerationSystem {
 
 
             System.out.println("Bugs detected :" + displayBugs.size());
+            System.out.println(api_Request.DELETE().getStatus());
         } catch (Exception e) {
             System.out.println("An error has occurred during execution");
         }

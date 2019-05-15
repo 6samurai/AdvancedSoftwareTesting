@@ -119,6 +119,18 @@ public class CommonElements {
         return  false;
     }
 
+    public Pixel lookupPixel(int x_axis, int y_axis, List<Pixel> pixelList) {
+        for (final Pixel currentPixel : pixelList) {
+            // Access properties of person, usage of getter methods would be good
+            if (currentPixel.getX() ==x_axis && currentPixel.getY() ==y_axis) {
+                // Found matching person
+                return currentPixel;
+            }
+        }
+        return null;
+    }
+
+
     public void printFitness(){
         APIRequestCommands apiRequestCommands = new APIRequestCommands();
         HttpResponse<JsonNode> response = null;
