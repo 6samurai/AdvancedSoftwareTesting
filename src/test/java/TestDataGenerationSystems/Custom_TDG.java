@@ -1,4 +1,4 @@
-package SearchStrategies;
+package TestDataGenerationSystems;
 
 import APIRequest.APIRequestCommands;
 import Common.CommonElements;
@@ -6,11 +6,9 @@ import Pixel.Pixel;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 
 class Custom_TDG {
@@ -27,7 +25,7 @@ class Custom_TDG {
     private ArrayList<Pixel> originalPoints = new ArrayList<Pixel>();
     private Pixel initialPoint =null;
 
-    private int maxIteration = 50000;
+    private int maxIteration = 5000;
 
     private void selectNewPoint(ArrayList <Pixel> bugList){
         Custom_TDG custom_tdg_method = new Custom_TDG();
