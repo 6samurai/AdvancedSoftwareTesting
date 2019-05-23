@@ -8,63 +8,81 @@ import com.mashape.unirest.http.JsonNode;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
 
 public class Random_TDG {
 
 
     public static void main(String[] args) {
         try {
-            CommonElements common = new CommonElements();
-            APIRequestCommands api_Request = new APIRequestCommands();
-            String url = common.getUrl();
 
-            System.out.println(api_Request.DELETE().getStatus());
+                long startTime = System.nanoTime();
+                CommonElements common = new CommonElements();
+                APIRequestCommands api_Request = new APIRequestCommands();
+                String url = common.getUrl();
 
-            int maxIteration = 5000;
-            Pixel currentPixel = new Pixel();
-            List<Pixel> displayBugs = new ArrayList<Pixel>();
-            HttpResponse<JsonNode> response = null;
-            int strategySelection = 1;
-            boolean gridValuesValid = false;
-            List<Pixel> currentPoints = null;
-            for (int i = 0; i < maxIteration; i++) {
+                //number of pixel requests
+                int maxIteration = 100;
+                Pixel currentPixel = new Pixel();
+                //list of bugged pixels
+                List<Pixel> displayBugs = new ArrayList<Pixel>();
+                HttpResponse<JsonNode> response = null;
+                boolean gridValuesValid = false;
 
-                //Random Strategy
-                Random_TDG random_tdg = new Random_TDG();
-                currentPixel = random_tdg.Random_TDG_Method(currentPixel);
+                //Initial DELETE call
+                api_Request.DELETE();
 
-                currentPixel = common.setRandomRGB(currentPixel);
-                int fitness = 0;
-                if (common.putPixel(currentPixel)) {
-                    response = common.getPixel(currentPixel);
-                    gridValuesValid = common.comparePixel(response, currentPixel);
-                    if (!gridValuesValid) {
-                        displayBugs.add(currentPixel);
-                        System.out.println("x " + currentPixel.getX() + " y " + currentPixel.getY());
-                        fitness = (Integer) response.getBody().getObject().get("fitness");
+                for (int i = 0; i < maxIteration; i++) {
+
+                    //Random Strategy
+                    Random_TDG random_tdg = new Random_TDG();
+
+                    //set x and y values for current pixel
+                    currentPixel = random_tdg.Random_TDG_Method(currentPixel);
+                    //set RGB values for current pixel
+                    currentPixel = common.setRandomRGB(currentPixel);
+
+
+                    //PUT pixel API call
+                    if (common.putPixel(currentPixel)) {
+                        //GET pixel API call
+                        response = common.getPixel(currentPixel);
+                        //compare Response to current Pixel values
+                        gridValuesValid = common.comparePixel(response, currentPixel);
+                        if (!gridValuesValid) {
+                            //display bugged pixel
+                            displayBugs.add(currentPixel);
+                            System.out.println("x " + currentPixel.getX() + " y " + currentPixel.getY());
+                        }
+
+                    } else {
+                        throw new Exception();
                     }
-
-                } else {
-                    throw new Exception();
                 }
-            }
 
 
-            System.out.println("Bugs detected :" + displayBugs.size());
-            System.out.println(api_Request.DELETE().getStatus());
+                System.out.println("Bugs detected :" + displayBugs.size());
+                //Clean up DELETE Call
+                api_Request.DELETE();
+
+                long endTime = System.nanoTime();
+                System.out.println("Elapsed time " + (endTime-startTime)/1000000 + " ms");
+
+
         } catch (Exception e) {
             System.out.println("An error has occurred during execution");
         }
     }
 
+    //Random TDG method
     public Pixel Random_TDG_Method(Pixel currentPixel) {
         CommonElements common = new CommonElements();
+
         int x = common.randomWidthPoint();
         int y = common.randomLengthPoint();
+
         currentPixel.setX(x);
         currentPixel.setY(y);
-
 
         return currentPixel;
 
