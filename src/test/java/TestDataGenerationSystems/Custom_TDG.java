@@ -52,7 +52,7 @@ class Custom_TDG {
             int direction_y = 0;
             int prev_x = 0;
             int prev_y = 0;
-            int max_direction = 0;
+            int max_direction = 0;// this is maximum pixel of documentation
             int quadrant = 0;
             int new_x = 0;
             int new_y = 0;
@@ -85,7 +85,7 @@ class Custom_TDG {
                                 //if initial point is already recorded
                                 if (j == 0) {
                                     //if centre point was already registered - proceed with random restart
-                                    currentPoints = defaultGridValues(common.getLength(), common.getWidth(), displayBugs);
+                                    currentPoints = defaultGridValues(common.getMaxY(), common.getMaxX(), displayBugs);
                                     initialPoint = currentPoints.get(0);
                                     findInitialPoints = true;
                                     break;
@@ -100,7 +100,7 @@ class Custom_TDG {
 
                                 //if centre pixel has a fitness value of zero - select new point
                                 if (j == 0 && currentFitness == 0 && currentPoints.get(0).equals(initialPoint)) {
-                                    currentPoints = defaultGridValues(common.getLength(), common.getWidth(), displayBugs);
+                                    currentPoints = defaultGridValues(common.getMaxY(), common.getMaxX(), displayBugs);
                                     initialPoint = currentPoints.get(0);
                                     findInitialPoints = true;
                                     break;
@@ -137,7 +137,7 @@ class Custom_TDG {
                                 //if fitness of all of the neighbouring points is ==0
                             } else {
                                 //reset current point selection
-                                currentPoints = defaultGridValues(common.getLength(), common.getWidth(), displayBugs);
+                                currentPoints = defaultGridValues(common.getMaxY(), common.getMaxX(), displayBugs);
                                 // originalPoints = currentPoints;
                                 initialPoint = currentPoints.get(0);
                             }
@@ -159,7 +159,7 @@ class Custom_TDG {
                             }
                             //intial shift after first row identifies a point with 0 fitness
                         } else if ((!changeDirection && currentPoints.get(0).getFitness() == 0)
-                                || currentPoints.get(0).getX() == common.getWidth() - 1 || currentPoints.get(0).getY() == common.getLength() - 1
+                                || currentPoints.get(0).getX() == common.getMaxX() - 1 || currentPoints.get(0).getY() == common.getMaxY() - 1
                                 || currentPoints.get(0).getX() == 0 || currentPoints.get(0).getY() == 0) {
 
                             if (direction_x == 0 && direction_y < 0) {
@@ -184,7 +184,7 @@ class Custom_TDG {
                             }
 
                             //to include 1199 and 1599 respectively
-                            if (max_direction == common.getWidth() - 1 || currentPoints.get(0).getY() == common.getLength() - 1) {
+                            if (max_direction == common.getMaxX() - 1 || currentPoints.get(0).getY() == common.getMaxY() - 1) {
                                 max_direction++;
 
                             }
@@ -204,7 +204,7 @@ class Custom_TDG {
                                 direction_y = originalPoints.get(0).getY() - initialPoint.getY();
 
                             } else {
-                                //after first row shift is carried out
+                                //after first row shift is carried out - selection process is modified according to quadrant
                                 switch (quadrant) {
                                     case 1:
                                         //pixel selection before max direction pixel is met
@@ -272,7 +272,7 @@ class Custom_TDG {
                             new_x = prev_x + direction_x;
                             new_y = prev_y + direction_y;
 
-                            if ((new_x > 0 && new_x < common.getWidth() && new_y > 0 && new_y < common.getLength())) {
+                            if ((new_x > 0 && new_x < common.getMaxX() && new_y > 0 && new_y < common.getMaxY())) {
                                 currentPoints.get(0).setY(new_y);
                                 currentPoints.get(0).setX(new_x);
                                 //if selected pixel is beyond Virtual Monitor x and y conditions - random restart
@@ -284,7 +284,6 @@ class Custom_TDG {
                         }
                     }
                 }
-
 
                 int fitness;
                 //PUT pixel API call
@@ -313,7 +312,7 @@ class Custom_TDG {
                     throw new Exception("Put pixel operation failed");
                 }
             }
-
+          //  common.saveToFile("Custom_100",displayBugs);
             System.out.println("Bugs detected :" + displayBugs.size());
             //Clean Up DELETE call
             api_Request.DELETE();
@@ -328,7 +327,7 @@ class Custom_TDG {
         currentPoints.clear();
         originalPoints.clear();
         initialPoint = null;
-        currentPoints = custom_tdg_method.defaultGridValues(common.getLength(), common.getWidth(), bugList);
+        currentPoints = custom_tdg_method.defaultGridValues(common.getMaxY(), common.getMaxX(), bugList);
 
 
         for (int i = 0; i < currentPoints.size(); i++) {
@@ -355,7 +354,7 @@ class Custom_TDG {
         return copyToList;
     }
 
-
+    //add pixel to originalPixel Array List
     public ArrayList<Pixel> addPixelToList(ArrayList<Pixel> originalList, Pixel addPixel) {
         Pixel newPixel = new Pixel();
         newPixel.setX(addPixel.getX());
@@ -368,16 +367,18 @@ class Custom_TDG {
         originalList.add(newPixel);
         return originalList;
     }
-
+    // set up new ArrayList with centre point and 4 neighbouring pixels
     public ArrayList<Pixel> defaultGridValues(int length, int width, ArrayList<Pixel> bugList) {
 
         CommonElements commonElements = new CommonElements();
+        //random selection of centre pixel
         int x = commonElements.randomWidthPoint();
         int y = commonElements.randomLengthPoint();
         Pixel bugPixel = common.lookupPixel(x, y, bugList);
 
         ArrayList<Pixel> newGrid = new ArrayList<Pixel>();
-        int counter = 0;
+        //verify that selected pixel is not already evaluated
+        int counter = 0;//to avoid infinite loop scenario
         do {
             if (bugList != null) {
                 x = commonElements.randomWidthPoint();
@@ -398,7 +399,7 @@ class Custom_TDG {
         currentPixel.setFitness(-2);
         currentPixel = commonElements.setRandomRGB(currentPixel);
         newGrid.add(currentPixel); //initial point of (x,y)
-
+        //pixel selection of 4 neighbouring points
         for (int i = 0; i < 4; i++) {
             new_x = x;
             new_y = y;
@@ -409,7 +410,7 @@ class Custom_TDG {
                 new_y = y + (int) Math.pow(-1, i);
             }
 
-
+            //verify that neighbouring point coordinates fall within the system's parameters
             if (new_x < width && new_y < length) {
                 currentPixel = new Pixel();
                 currentPixel.setY(new_y);

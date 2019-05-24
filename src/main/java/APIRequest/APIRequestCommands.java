@@ -57,7 +57,6 @@ public class APIRequestCommands {
                     .header("Cache-Control", "no-cache")
                     .header("Host", "virtualscreen.azurewebsites.net")
                     .header("Connection", "keep-alive")
-                    //  .header("cache-control", "no-cache")
                     .asJson();
             //     System.out.println(response.getBody().getObject().get("r"));
             return response;

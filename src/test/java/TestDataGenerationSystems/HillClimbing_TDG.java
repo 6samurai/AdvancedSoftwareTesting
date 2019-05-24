@@ -23,7 +23,7 @@ public class HillClimbing_TDG {
             //number of pixel requests
             int maxIteration = 100;
             Pixel currentPixel = new Pixel();
-            List<Pixel> displayBugs = new ArrayList<Pixel>();
+            ArrayList<Pixel> displayBugs = new ArrayList<Pixel>();
             HttpResponse<JsonNode> response = null;
 
             boolean gridValuesValid = false;
@@ -35,7 +35,7 @@ public class HillClimbing_TDG {
             for (int i = 0; i < maxIteration; i++) {
 
                 HillClimbing_TDG hillClimbing_tdg = new HillClimbing_TDG();
-                currentPoints = hillClimbing_tdg.HillClimbing_TDG_Method(currentPoints, common.getLength(), common.getWidth(), displayBugs);
+                currentPoints = hillClimbing_tdg.HillClimbing_TDG_Method(currentPoints, common.getMaxY(), common.getMaxX(), displayBugs);
 
                 //set x and y values for current pixel
                 currentPixel = currentPoints.get(0);
@@ -72,7 +72,7 @@ public class HillClimbing_TDG {
 
             long endTime = System.nanoTime();
             System.out.println("Elapsed time " + (endTime - startTime) / 1000000 + " ms");
-
+           // common.saveToFile("Hill_100",displayBugs);
 
         } catch (Exception e) {
             System.out.println("An error has occurred during execution");
@@ -107,7 +107,7 @@ public class HillClimbing_TDG {
                     //ignore default pixel values - said pixel still needs to be evaluated for fitness
                     if (currentFitness != -2 && currentFitness != largestFitness)
                         fitnessCount += currentFitness;
-
+                    //when pixel still needs to be evaluated
                     if (currentFitness == -2) {
                         if (i != 0)
                             Collections.swap(currentGrid, 0, i);
@@ -148,7 +148,7 @@ public class HillClimbing_TDG {
 
             }
 
-            //checks when hill climb algorithm reaches a local maximum
+            //checks if hill climb algorithm reaches a local maximum
             if (diff_x == 0 && diff_y == 0 && currentGrid.size() == 9) {
                 //obtain new values
                 currentGrid = defaultGridValues(length, width, 3, 3);

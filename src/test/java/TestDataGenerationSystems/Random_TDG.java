@@ -25,7 +25,7 @@ public class Random_TDG {
                 int maxIteration = 100;
                 Pixel currentPixel = new Pixel();
                 //list of bugged pixels
-                List<Pixel> displayBugs = new ArrayList<Pixel>();
+                ArrayList<Pixel> displayBugs = new ArrayList<Pixel>();
                 HttpResponse<JsonNode> response = null;
                 boolean gridValuesValid = false;
 
@@ -33,7 +33,7 @@ public class Random_TDG {
                 api_Request.DELETE();
 
                 for (int i = 0; i < maxIteration; i++) {
-
+                    currentPixel = new Pixel();
                     //Random Strategy
                     Random_TDG random_tdg = new Random_TDG();
 
@@ -60,7 +60,7 @@ public class Random_TDG {
                     }
                 }
 
-
+               // common.saveToFile("Random_100",displayBugs);
                 System.out.println("Bugs detected :" + displayBugs.size());
                 //Clean up DELETE Call
                 api_Request.DELETE();

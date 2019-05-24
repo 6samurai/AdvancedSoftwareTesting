@@ -4,7 +4,12 @@ import APIRequest.APIRequestCommands;
 import Pixel.Pixel;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.sun.glass.ui.Pixels;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,11 +29,11 @@ public class CommonElements {
         return sessionID;
     }
 
-    public int getLength() {
+    public int getMaxY() {
         return y_axis;
     } //returns maximum y-axis attribute
 
-    public int getWidth() {
+    public int getMaxX() {
         return x_axis;
     }//returns maximum x-axis attribute
 
@@ -120,5 +125,16 @@ public class CommonElements {
             }
             System.out.println("\n");
         }
+    }
+
+    public void saveToFile(String fileName, ArrayList<Pixel> pixelList) throws FileNotFoundException {
+        PrintWriter pw;
+        pw = new PrintWriter(new FileOutputStream(fileName));
+        String toSave;
+        for (int i = 0; i < pixelList.size(); i++) {
+            toSave = "x " + pixelList.get(i).getX() + " y " + pixelList.get(i).getY();
+            pw.println(toSave);
+        }
+        pw.close();
     }
 }
